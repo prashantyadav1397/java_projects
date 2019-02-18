@@ -1,0 +1,40 @@
+CREATE TABLE users ( username varchar(20) primary key,
+		     pass varchar(20));
+
+
+CREATE TABLE announce( aid varchar(5) PRIMARY KEY,
+                      anno varchar(500));
+                      
+CREATE TABLE party( party_id varchar(5) PRIMARY key ,
+                   pname varchar(20),
+                   ploc varchar(20),
+                   nom mediumint,
+                   plead varchar(30));
+
+CREATE TABLE manifesto( mid varchar(5),
+                       manifesto varchar(500),
+                       party_id varchar(5) REFERENCES party(party_id),
+                       primary key(mid, party_id));
+                       
+CREATE TABLE candidate ( can_id varchar(5),
+                        party_id varchar(5) REFERENCES party(party_id),
+                        cname varchar(30),
+                        age int,
+                        primary key (can_id,party_id));
+                        
+CREATE TABLE voter( v_id varchar(5) PRIMARY key,
+                   name varchar(50),
+                   address varchar(50), 
+                   vage int);
+                   
+CREATE table votes( v_id varchar(5) REFERENCES voter(v_id),
+                   party_id varchar(5) REFERENCES party(party_id), 
+                   can_id varchar(5) REFERENCES candidate(can_id),
+                   primary key (v_id,party_id,can_id));
+
+CREATE table polstat (pstid varchar(5) PRIMARY key,
+                      psname varchar(100),
+                      psloc varchar(100));
+
+CREATE table votestot ( can_id varchar(5) REFERENCES candidate(can_id),
+                       	total_votes int );

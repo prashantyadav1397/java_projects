@@ -1,0 +1,29 @@
+// candidate
+
+DELIMITER @@
+
+CREATE TRIGGER voting_system.age_trig
+BEFORE INSERT ON voting_system.candidate
+FOR EACH ROW
+BEGIN
+    IF (NEW.cage <25) THEN 
+        SIGNAL SQLSTATE '02000' SET MESSAGE_TEXT = 'AGE < 25!';
+   END IF;
+END @@ 
+DELIMITER ; 
+
+
+
+//voter
+
+DELIMITER @@
+
+CREATE TRIGGER voting_system.age_trig1
+BEFORE INSERT ON voting_system.voter
+FOR EACH ROW
+BEGIN
+    IF (NEW.vage <18) THEN 
+        SIGNAL SQLSTATE '02000' SET MESSAGE_TEXT = 'AGE < 18!';
+   END IF;
+END @@ 
+DELIMITER ; 

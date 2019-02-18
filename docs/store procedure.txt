@@ -1,0 +1,9 @@
+delimiter //
+create or replace procedure votes_tot
+begin 
+TRUNCATE votestot;
+insert into votestot (can_id, total_votes)
+ select can_id,count(v_id) as total_votes from votes group by can_id;
+end
+//
+delimiter ;
